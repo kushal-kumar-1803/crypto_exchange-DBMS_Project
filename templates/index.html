@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Available Cryptocurrencies</h2>
+  </div>
+
+  {% if cryptos %}
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Blockchain</th>
+        <th>Launch Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in cryptos %}
+      <tr>
+        <td>{{ c.Name }}</td>
+        <td>{{ c.Symbol }}</td>
+        <td>{{ c.BlockchainType }}</td>
+        <td>{{ c.LaunchDate }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No cryptocurrencies found in the database.</p>
+  {% endif %}
+
+  <hr>
+  <p>Explore the <a href="{{ url_for('users') }}">Users</a> section or view your <a href="{{ url_for('wallet_page') }}">Wallet</a>.</p>
+{% endblock %}

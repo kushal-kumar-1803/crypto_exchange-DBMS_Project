@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Wallet</h2>
+{% if wallet %}
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr><th>Cryptocurrency</th><th>Balance</th></tr>
+  </thead>
+  <tbody>
+    {% for w in wallet %}
+    <tr>
+      <td>{{ w.Crypto }}</td>
+      <td>{{ w.Balance }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No wallet data available.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>User Dashboard</h2>
+<p>Welcome, {{ user.Name }}!</p>
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5>Portfolio Value</h5>
+        <p class="fs-4">${{ portfolio_value | default(0) }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5>KYC Status</h5>
+        <p class="fs-5">{{ user.KYCStatus }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<a class="btn btn-primary mt-3" href="{{ url_for('wallet_page') }}">View Wallet</a>
+{% endblock %}

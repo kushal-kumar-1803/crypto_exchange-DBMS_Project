@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Manage Users</h2>
+
+{% if users %}
+<table class="table table-hover mt-3">
+  <thead class="table-dark">
+    <tr>
+      <th>User ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>KYC Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for u in users %}
+    <tr>
+      <td>{{ u.UserID }}</td>
+      <td>{{ u.Name }}</td>
+      <td>{{ u.Email }}</td>
+      <td>
+        {% if u.KYCStatus == "Verified" %}
+          <span class="badge bg-success">{{ u.KYCStatus }}</span>
+        {% else %}
+          <span class="badge bg-warning text-dark">{{ u.KYCStatus }}</span>
+        {% endif %}
+      </td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary">Edit</button>
+        <button class="btn btn-sm btn-outline-danger">Delete</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No users found.</p>
+{% endif %}
+{% endblock %}
