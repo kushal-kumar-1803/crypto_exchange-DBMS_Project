@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="row text-center mt-4">
+  <div class="col-md-4">
+    <div class="card bg-light"><div class="card-body">
+      <h4>{{ users_count }}</h4><p>Users</p>
+    </div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card bg-light"><div class="card-body">
+      <h4>{{ cryptos_count }}</h4><p>Cryptocurrencies</p>
+    </div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card bg-light"><div class="card-body">
+      <h4>{{ orders_count }}</h4><p>Orders</p>
+    </div></div>
+  </div>
+</div>
+{% endblock %}

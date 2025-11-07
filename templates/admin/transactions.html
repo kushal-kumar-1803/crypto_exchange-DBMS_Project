@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All Transactions</h2>
+
+{% if transactions %}
+<table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Order</th>
+      <th>Amount</th>
+      <th>Type</th>
+      <th>Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in transactions %}
+    <tr>
+      <td>{{ t.TransactionID }}</td>
+      <td>{{ t.UserID }}</td>
+      <td>{{ t.OrderID }}</td>
+      <td>${{ t.Amount }}</td>
+      <td>{{ t.TransactionType }}</td>
+      <td>{{ t.Timestamp }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No transactions recorded.</p>
+{% endif %}
+{% endblock %}
