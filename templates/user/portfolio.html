@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">📊 Your Portfolio</h2>
+
+  {% if portfolio %}
+  <table class="table table-bordered table-hover text-center align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Cryptocurrency</th>
+        <th>Symbol</th>
+        <th>Balance</th>
+        <th>Current Price (USD)</th>
+        <th>Total Value (USD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in portfolio %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ item.crypto }}</td>
+        <td>{{ item.symbol }}</td>
+        <td>{{ "%.8f"|format(item.balance) }}</td>
+        <td>${{ "%.2f"|format(item.price) }}</td>
+        <td><strong>${{ "%.2f"|format(item.value) }}</strong></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="alert alert-success text-center mt-4">
+    <h4>Total Portfolio Value: <b>${{ "%.2f"|format(total_value) }}</b></h4>
+  </div>
+  {% else %}
+  <div class="alert alert-info text-center">
+    You don't have any crypto holdings yet.
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

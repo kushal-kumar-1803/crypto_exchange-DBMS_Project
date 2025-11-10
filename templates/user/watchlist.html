@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <h2>📋 Your Watchlist</h2>
+  <p>Cryptocurrencies you’re keeping an eye on.</p>
+  <hr>
+
+  {% if watchlist_data %}
+  <table class="table table-hover mt-3">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Blockchain</th>
+        <th>Launch Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for watch, crypto in watchlist_data %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ crypto.Name }}</td>
+        <td>{{ crypto.Symbol }}</td>
+        <td>{{ crypto.BlockchainType }}</td>
+        <td>{{ crypto.LaunchDate.strftime('%Y-%m-%d') if crypto.LaunchDate else 'N/A' }}</td>
+        <td>
+          <form action="{{ url_for('user.remove_from_watchlist', crypto_id=crypto.CryptoID) }}" method="POST">
+            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-muted">You haven’t added anything yet. Go to <a href="{{ url_for('user.dashboard') }}">Dashboard</a> to add some!</p>
+  {% endif %}
+</div>
+
+{% endblock %}

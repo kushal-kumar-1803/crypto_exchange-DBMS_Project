@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+  <h3 class="mb-3">💼 Your Wallet</h3>
+  <p>Your total portfolio value: <strong>${{ "%.2f"|format(total_value) }}</strong></p>
+
+  <table class="table table-striped mt-3">
+    <thead class="table-dark">
+      <tr>
+        <th>Cryptocurrency</th>
+        <th>Symbol</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wallet, crypto in wallet_data %}
+      <tr>
+        <td>{{ crypto.Name }}</td>
+        <td>{{ crypto.Symbol }}</td>
+        <td>{{ "%.4f"|format(wallet.Balance) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

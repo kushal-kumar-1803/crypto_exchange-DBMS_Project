@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">🧾 My Transactions</h2>
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Crypto</th>
+            <th>Amount</th>
+            <th>Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for txn, order, crypto in transactions %}
+        <tr>
+            <td>{{ txn.TransactionID }}</td>
+            <td>{{ txn.TransactionType }}</td>
+            <td>{{ crypto.Symbol }}</td>
+            <td>${{ txn.Amount }}</td>
+            <td>{{ txn.Timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="text-center">No transactions yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

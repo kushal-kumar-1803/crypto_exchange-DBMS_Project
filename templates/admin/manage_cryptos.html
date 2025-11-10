@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Manage Cryptocurrencies</h2>
+
+<div class="mb-3 text-end">
+  <button class="btn btn-success">Add New Crypto</button>
+</div>
+
+{% if cryptos %}
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Crypto ID</th>
+      <th>Name</th>
+      <th>Symbol</th>
+      <th>Blockchain</th>
+      <th>Launch Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in cryptos %}
+    <tr>
+      <td>{{ c.CryptoID }}</td>
+      <td>{{ c.Name }}</td>
+      <td>{{ c.Symbol }}</td>
+      <td>{{ c.BlockchainType }}</td>
+      <td>{{ c.LaunchDate }}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary">Edit</button>
+        <button class="btn btn-sm btn-outline-danger">Delete</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No cryptocurrencies found.</p>
+{% endif %}
+{% endblock %}

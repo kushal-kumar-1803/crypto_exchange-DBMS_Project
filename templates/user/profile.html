@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">👤 User Profile</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" value="{{ user.Name }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Phone</label>
+        <input type="text" name="phone" value="{{ user.Phone }}" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label>City</label>
+        <input type="text" name="city" value="{{ user.City }}" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label>State</label>
+        <input type="text" name="state" value="{{ user.State }}" class="form-control">
+    </div>
+    <button class="btn btn-primary">Save Changes</button>
+</form>
+{% endblock %}
