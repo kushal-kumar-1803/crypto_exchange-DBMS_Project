@@ -1,67 +1,158 @@
-# Crypto Exchange Database Project
-A comprehensive **MySQL database system** designed to simulate a real-world cryptocurrency exchange.  
-Includes **automated triggers**, **relational design**, and **Flask backend authentication** for managing users, assets, wallets, and trades.
+# Virtual Crypto Exchange Database System
+A **Flask + MySQL-based web application** that simulates a real-world cryptocurrency exchange.  
+It provides secure user and admin management, trading operations, live portfolio calculations, and automated transaction triggers for realistic exchange behavior.
 
 ---
 
-## Overview
-The **Crypto Exchange Database Project** manages users, crypto assets, wallets, market prices, buy/sell orders, automated transactions, and admin authentication.  
+## 📋 Overview
+The **Crypto Exchange Database System** integrates a **MySQL relational database** with a **Flask backend** to handle:
+- User registration, authentication, and KYC verification  
+- Buy/sell order management with automatic transaction logging  
+- Wallet and portfolio tracking  
+- Cryptocurrency data and real-time pricing  
+- Admin monitoring and analytics dashboard  
 
-It demonstrates:
-- Relational database design & normalization  
-- Foreign key relationships  
-- SQL analytics & triggers in MySQL  
-- Integration with Flask for admin control  
-
-**Key Components:**
-- User & Admin Management (KYC & authentication)
-- Cryptocurrency Data & Market Prices
-- Wallet Balances & Portfolio Tracking
-- Order & Transaction Management
-- Automatic Transaction Logging (via trigger)
-- Watchlist for tracking favorite cryptocurrencies
+**Key Highlights**
+- Full relational schema with foreign keys and triggers  
+- Automated transaction logging using MySQL triggers  
+- Secure hashed admin login credentials  
+- Flask backend with modular routes and templates  
+- Portfolio computation in USD value per user  
 
 ---
 
-## Web Integration
-The system can be integrated with a **Flask web app** for an admin dashboard and API connectivity.
+## 🌐 Web Application
+The Flask web app provides a clean, modular structure for managing exchange operations.
 
-### Web Application Features:
-- **Dashboard:** Overview of users, wallets, and market activity  
-- **User Management:** View and manage KYC and credentials  
-- **Crypto Management:** Add and monitor cryptocurrency data  
-- **Orders & Transactions:** Record and monitor trades  
-- **Watchlist:** Track favorite cryptocurrencies  
-- **Portfolio Analysis:** Calculate holdings in USD  
-- **Secure Admin Login:** Access management with hashed credentials  
+### Key Features
+- **Dashboard:** Displays key stats, users, wallets, and trades  
+- **User Management:** Registration, login, KYC, wallet balance view  
+- **Admin Panel:** Transaction and market monitoring tools  
+- **Crypto Management:** Manage coins and update market prices  
+- **Trading:** Place buy/sell orders with instant wallet updates  
+- **Triggers:** Automatically insert transaction records upon order creation  
+- **Responsive Design:** Built with clean Bootstrap templates  
+
+### Technology Stack
+| Layer | Technology |
+|-------|-------------|
+| **Backend** | Flask (Python) |
+| **Database** | MySQL 8.0+ |
+| **Frontend** | HTML5, CSS3, JS, Bootstrap |
+| **ORM / DB Access** | Flask-SQLAlchemy or MySQL Connector |
+| **Environment Config** | `.env.example` |
 
 ---
 
-## Database Schema
+## 🗄️ Database Schema
 
 ### Core Tables
-
 | Table | Description |
 |--------|--------------|
-| **User** | Stores user details, KYC status, and login credentials |
-| **Cryptocurrency** | Contains all crypto asset details |
-| **MarketPrice** | Tracks current market prices |
-| **Wallet** | Maintains user crypto balances |
-| **Orders** | Records buy/sell orders |
-| **Transaction** | Logs all transactions (auto-triggered) |
-| **Watchlist** | Tracks user’s favorite cryptocurrencies |
-| **AdminUser** | Stores admin credentials for backend login |
+| **User** | Stores user credentials, phone, and KYC status |
+| **Cryptocurrency** | Lists supported cryptocurrencies and blockchain info |
+| **MarketPrice** | Tracks current prices of each coin |
+| **Wallet** | Links users with their crypto balances |
+| **Orders** | Stores buy/sell orders |
+| **Transaction** | Automatically logs each trade |
+| **Watchlist** | Tracks user-selected cryptos |
+| **AdminUser** | Stores admin login credentials |
+
+### Triggers
+- **`after_order_insert`** — Automatically creates a transaction record when a new order is placed.
 
 ---
 
-### SQL Schema
+## 🚀 Quick Setup
 
-#### 1️⃣ Create Database
-```sql
-DROP DATABASE IF EXISTS crypto_exchange;
-CREATE DATABASE crypto_exchange;
-USE crypto_exchange;
-2️⃣ User Table
+### 🧩 Prerequisites
+- Python 3.10 or above  
+- MySQL 8.0+  
+- MySQL Workbench or CLI  
+- Flask and pip environment  
+
+---
+
+### ⚙️ Installation Steps
+
+#### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/your-username/crypto-exchange-db.git
+cd crypto-exchange-db
+2️⃣ Set Up Virtual Environment
+bash
+Copy code
+python -m venv .venv
+source .venv/Scripts/activate   # for Windows PowerShell
+3️⃣ Install Dependencies
+bash
+Copy code
+pip install -r requirements.txt
+4️⃣ Configure Database Connection
+Rename .env.example → .env and update credentials:
+
+ini
+Copy code
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=crypto_exchange
+5️⃣ Import Database Schema
+bash
+Copy code
+mysql -u root -p < database/crypto_exchange_final_fixed.sql
+6️⃣ Run the Application
+bash
+Copy code
+python app.py
+7️⃣ Access Web Interface
+Open your browser:
+👉 http://localhost:5000
+
+📁 File Structure
+graphql
+Copy code
+DBMS_PROJECT_BACKUP/
+├── database/
+│   └── crypto_exchange_final_fixed.sql     # MySQL schema with tables & triggers
+│
+├── models/                                 # ORM models for database entities
+│   ├── __init__.py
+│   ├── admin_models.py
+│   ├── crypto_models.py
+│   └── user_models.py
+│
+├── routes/                                 # Flask route controllers
+│   ├── __init__.py
+│   ├── admin_routes.py
+│   ├── public_routes.py
+│   └── user_routes.py
+│
+├── static/                                 # Frontend assets
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── templates/                              # HTML templates
+│   ├── base.html
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── user_list.html
+│   ├── admin/
+│   └── user/
+│
+├── app.py                                  # Main Flask app entry point
+├── config.py                               # Configuration and DB setup
+├── extensions.py                           # Flask extensions initialization
+├── db_operations.py                        # SQL and helper functions
+├── requirements.txt                        # Python dependencies
+├── .env.example                            # Environment config template
+├── .gitignore                              # Files ignored in Git
+└── README.md                               # Project documentation
+
+🧩 Core SQL Schema
+Example Table: User
 sql
 Copy code
 CREATE TABLE User (
@@ -72,81 +163,9 @@ CREATE TABLE User (
   Phone VARCHAR(15),
   KYCStatus VARCHAR(20)
 );
-3️⃣ Cryptocurrency Table
+Example Trigger
 sql
 Copy code
-CREATE TABLE Cryptocurrency (
-  CryptoID INT AUTO_INCREMENT PRIMARY KEY,
-  Name VARCHAR(50) NOT NULL,
-  Symbol VARCHAR(10) NOT NULL,
-  BlockchainType VARCHAR(30),
-  LaunchDate DATE
-);
-4️⃣ Market Price Table
-sql
-Copy code
-CREATE TABLE MarketPrice (
-  PriceID INT AUTO_INCREMENT PRIMARY KEY,
-  CryptoID INT,
-  DateTime DATETIME,
-  Price DECIMAL(15,2),
-  FOREIGN KEY (CryptoID) REFERENCES Cryptocurrency(CryptoID)
-);
-5️⃣ Wallet Table
-sql
-Copy code
-CREATE TABLE Wallet (
-  UserID INT,
-  CryptoID INT,
-  Balance DECIMAL(15,4),
-  PRIMARY KEY (UserID, CryptoID),
-  FOREIGN KEY (UserID) REFERENCES User(UserID),
-  FOREIGN KEY (CryptoID) REFERENCES Cryptocurrency(CryptoID)
-);
-6️⃣ Orders Table
-sql
-Copy code
-CREATE TABLE Orders (
-  OrderID INT AUTO_INCREMENT PRIMARY KEY,
-  UserID INT,
-  CryptoID INT,
-  OrderType VARCHAR(10),
-  Quantity DECIMAL(10,2),
-  Price DECIMAL(15,2),
-  Status VARCHAR(20),
-  Timestamp DATETIME,
-  FOREIGN KEY (UserID) REFERENCES User(UserID),
-  FOREIGN KEY (CryptoID) REFERENCES Cryptocurrency(CryptoID)
-);
-7️⃣ Transaction Table
-sql
-Copy code
-CREATE TABLE Transaction (
-  TransactionID INT AUTO_INCREMENT PRIMARY KEY,
-  OrderID INT,
-  UserID INT,
-  Amount DECIMAL(15,2),
-  TransactionType VARCHAR(20),
-  Timestamp DATETIME,
-  FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
-  FOREIGN KEY (UserID) REFERENCES User(UserID)
-);
-8️⃣ Watchlist Table
-sql
-Copy code
-CREATE TABLE Watchlist (
-  WatchlistID INT AUTO_INCREMENT PRIMARY KEY,
-  UserID INT,
-  CryptoID INT,
-  DateAdded DATE,
-  FOREIGN KEY (UserID) REFERENCES User(UserID),
-  FOREIGN KEY (CryptoID) REFERENCES Cryptocurrency(CryptoID)
-);
-9️⃣ Trigger – Auto Transaction Log
-sql
-Copy code
-DROP TRIGGER IF EXISTS after_order_insert;
-DELIMITER //
 CREATE TRIGGER after_order_insert
 AFTER INSERT ON Orders
 FOR EACH ROW
@@ -154,88 +173,9 @@ BEGIN
   INSERT INTO Transaction (OrderID, UserID, Amount, TransactionType, Timestamp)
   VALUES (NEW.OrderID, NEW.UserID, (NEW.Quantity * NEW.Price), 'Trade', NOW());
 END;
-//
-DELIMITER ;
-🔐 10️⃣ Admin Table
-sql
-Copy code
-CREATE TABLE IF NOT EXISTS AdminUser (
-  AdminID INT AUTO_INCREMENT PRIMARY KEY,
-  Username VARCHAR(100) UNIQUE NOT NULL,
-  Password VARCHAR(200) NOT NULL
-);
+🧮 Portfolio Value Query
+Calculate each user's total crypto value in USD:
 
-INSERT INTO AdminUser (Username, Password)
-VALUES ('admin', '$pbkdf2:sha256:600000$UFXvGKoLmDPCdBrT$4d84b28f78c5b93a6d98a6d9cf7898bdbf74b440ee0a1cb0f66bfcdf5ad1b8df');
- Quick Setup
- Prerequisites
-MySQL 8.0 or higher
-
-MySQL Workbench or CLI
-
-Flask (optional for web interface)
-
-Python 3.10+ and pip
-
-Installation Steps
-Clone or download the repository:
-
-bash
-Copy code
-git clone https://github.com/your-username/crypto-exchange-db.git
-cd crypto-exchange-db
-Create and initialize the database:
-
-bash
-Copy code
-mysql -u root -p < database_schema.sql
-Verify setup:
-
-bash
-Copy code
-mysql -u root -p -e "USE crypto_exchange; SHOW TABLES; SHOW TRIGGERS;"
-(Optional) Run Flask backend:
-
-bash
-Copy code
-pip install -r requirements.txt
-python app.py
-Visit web app:
-http://localhost:5000
-
-📁 File Structure
-bash
-Copy code
-crypto-exchange-db/
-├── README.md                  # Project documentation
-├── database_schema.sql        # All database tables and triggers
-├── app.py                     # Flask backend (optional)
-├── requirements.txt            # Dependencies
-├── templates/                 # HTML templates for admin UI
-│   ├── login.html
-│   ├── dashboard.html
-│   └── portfolio.html
-└── sample_queries.sql         # Verification and test queries
- Key Features & Triggers
-Data Validation & Automation
-Automatic Transaction Logging: Trigger inserts transaction records after new orders
-
-Portfolio Calculation: Computes USD value per user
-
-KYC Validation: Ensures verified users only
-
-Watchlist Tracking: Tracks favorite cryptocurrencies
-
-Business Logic & Analytics
-Order-book management and trade history
-
-Join queries for user portfolio computation
-
-Aggregated data for admin reports
-
-Enforced foreign key integrity
-
- Sample Portfolio Query
 sql
 Copy code
 SELECT 
@@ -245,15 +185,31 @@ FROM Wallet W
 JOIN MarketPrice M ON W.CryptoID = M.CryptoID
 JOIN User U ON W.UserID = U.UserID
 GROUP BY U.UserID;
-🔧 Technology Stack
-Layer	Technology
-Database	MySQL 8.x
-Backend (Optional)	Flask
-Frontend (Optional)	HTML5, Bootstrap
-Tools	MySQL Workbench, VS Code
+🔐 Admin Credentials (Default)
+Username	Password
+admin	(hashed) $pbkdf2:sha256:600000$UFXvGKoLmDPCdBrT...
 
-🧪 Validation & Testing
-After setup, run:
+Use Flask’s generate_password_hash() to update credentials if needed.
+
+🧠 Key Features & Triggers
+⚙️ Automation
+Transaction auto-logging on each order
+
+Portfolio recalculations based on latest market prices
+
+KYC verification enforcement
+
+💡 Business Logic
+Secure user authentication
+
+Multi-crypto wallet linking
+
+Real-time portfolio aggregation
+
+Normalized data schema with foreign keys
+
+🧪 Testing and Verification
+Run these commands in MySQL:
 
 sql
 Copy code
@@ -261,25 +217,22 @@ SHOW TABLES;
 SHOW TRIGGERS;
 SELECT * FROM Transaction;
 Expected Output:
-✅ Tables created successfully
-✅ Trigger after_order_insert logs new transactions
-✅ Admin user seeded
+✅ Tables successfully created
+✅ Trigger after_order_insert active
+✅ Admin login record inserted
 
 👥 Team Members
 Name	Role
 Kushal Kumar - Database Design, Integration & Backend
 Laasya R - Data Insertion, SQL Queries & Frontend
 
-Example Outputs
-Tables:
-pgsql
-Copy code
-User, Cryptocurrency, MarketPrice, Wallet, Orders, Transaction, Watchlist, AdminUser
-Trigger:
+🧾 Example Outputs
+Trigger Verification
 sql
 Copy code
+SHOW TRIGGERS;
 after_order_insert | INSERT | Orders | AFTER | INSERT INTO Transaction ...
-Portfolio Query Result:
+Portfolio Query Result
 Name	Portfolio_Value_USD
 Rahul Kumar	228,500.00
 Ananya Gowda	275.00
@@ -287,6 +240,6 @@ Kushal Kumar	9,600.00
 Laasya R	15,825.00
 Priya M	1,950.00
 
-License
+⚖️ License
 This project is open-source for academic and learning purposes.
 You may reuse or modify it for educational projects.
