@@ -1,4 +1,4 @@
-Crypto Exchange Database Project (Final - 2025)
+Crypto Exchange Database Project
 Overview
 The Crypto Exchange Database Project is a structured relational database system designed to simulate a real-world cryptocurrency exchange.
 
@@ -182,3 +182,4 @@ License
 This project is open-source for academic and learning purposes.
 
 You may reuse or modify the SQL schema for educational projects.
+
